@@ -3,4 +3,18 @@
   <groupId>com.cy</groupId>
   <artifactId>Learning</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <properties>
+  	<junit-version>4.7</junit-version>
+  </properties>
+  
+  <dependencies>
+  
+  	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>${junit-version}</version>
+	</dependency>
+  
+  </dependencies>
+  
 </project>
