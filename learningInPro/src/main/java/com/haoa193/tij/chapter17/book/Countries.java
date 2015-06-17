@@ -46,7 +46,6 @@ public class Countries {
 
             private class Iter implements Iterator<Map.Entry<String, String>> {
                 private com.haoa193.tij.chapter17.book.Countries.FlyweightMap.EntrySet.Entry entry = new com.haoa193.tij.chapter17.book.Countries.FlyweightMap.EntrySet.Entry(-1);
-
                 public boolean hasNext() {
                     return entry.index < size - 1;
                 }
@@ -54,6 +53,10 @@ public class Countries {
                 public Map.Entry<String, String> next() {
                     entry.index++;
                     return entry;
+                }
+                @Override
+                public void remove() {
+                    throw new UnsupportedOperationException();
                 }
             }
 

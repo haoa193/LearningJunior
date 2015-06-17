@@ -15,7 +15,27 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <properties>
+      <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+  </properties>
+
+<!--  <build>
+    <finalName>learningInPro</finalName>
+  </build>-->
   <build>
     <finalName>learningInPro</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.plugin.version}</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
+
+
 </project>
