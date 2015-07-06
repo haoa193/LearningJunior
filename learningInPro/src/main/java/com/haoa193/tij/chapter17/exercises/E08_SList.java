@@ -12,18 +12,18 @@ public class E08_SList {
         System.out.println("Demonstrating SListIterator");
         SList<String> sl = new SList<String>();
         System.out.println(sl);
-//        SListIterator<String> slit = sl.iterator();
-//        slit.add("one");
-//        slit.add("two");
-//        slit.add("tree");
-//        System.out.println(slit.hasNext());
-//        System.out.println(sl);
-//        slit = sl.iterator();
-//        slit.add("four");
-//
-//        for (; slit.hasNext(); ) {
-//            System.out.println(slit.next());
-//        }
+        SListIterator<String> slit = sl.iterator();
+        slit.add("one");
+        slit.add("two");
+        slit.add("tree");
+        System.out.println(slit.hasNext());
+        System.out.println(sl);
+        slit = sl.iterator();
+        slit.add("four");
+
+        for (; slit.hasNext(); ) {
+            System.out.println(slit.next());
+        }
 
     }
 
@@ -42,12 +42,11 @@ class SList<T> {
 
     private final Link<T> header = new Link<T>(null, null);
     SList(){
-        System.out.println("before SList contructors");
         header.next = header;
-        System.out.println("after SList contructors");
     }
 
     public SListIterator<T> iterator(){
+        System.out.println("iterator()");
         return new SListIteratorImpl();
     }
 
@@ -55,7 +54,6 @@ class SList<T> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-
         for (SListIterator<T> it = iterator(); it.hasNext(); ) {
             T element = it.next();
             sb.append(element == this ? "this SList" : String.valueOf(element));
@@ -79,7 +77,6 @@ class SList<T> {
     private class SListIteratorImpl implements SListIterator<T> {
         private Link<T> lastReturned = header;
         private Link<T> next;
-
         SListIteratorImpl() {
             next = header.next;
         }
@@ -87,7 +84,6 @@ class SList<T> {
         public boolean hasNext() {
             System.out.println("hasNext, next:" + next);
             System.out.println("hasNext, header:" + header);
-
             return next != header;
         }
 
@@ -107,25 +103,22 @@ class SList<T> {
                 throw new IllegalStateException();
             }
             for (Link<T> curr = header; ; curr = curr.next) {
-
                 if (curr.next == lastReturned) {
                     curr.next = lastReturned.next;
                     break;
                 }
                 System.out.println("remove, header:" + header);
                 lastReturned = header;
-
             }
-
         }
-
         @Override
         public void add(T element) {
-            System.out.println("add, header:" + header);
+            System.out.println("add, header:" + header.element);
+            System.out.println("add, next:" + next.element);
             lastReturned = header;
             Link<T> newLink = new Link<T>(element, next);
-
             if (header.next == header) {//empty list
+                System.out.println("empty list");
                 header.next = newLink;
             } else {
                 for (Link<T> curr = header; ; curr = curr.next) {
@@ -133,11 +126,8 @@ class SList<T> {
                         curr.next = newLink;
                         break;
                     }
-
                 }
             }
-
-
         }
     }
 }
